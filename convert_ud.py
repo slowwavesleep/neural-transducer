@@ -1,6 +1,7 @@
 from typing import Tuple, List, Optional
 
 from conllu import parse, SentenceList
+from tqdm.auto import tqdm
 
 KEEP_DUPLICATES = True
 ORIGINAL_FORMAT = False
@@ -29,7 +30,7 @@ def convert_to_triples(
         symbols_to_remove: Optional[Tuple[str, ...]] = None,
 ) -> List[Tuple[str, str, str]]:
     triples = list()
-    for sent in parsed_conllu:
+    for sent in tqdm(parsed_conllu):
         for token in sent:
             form = token["form"]
             lemma = token["lemma"]
